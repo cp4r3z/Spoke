@@ -3,6 +3,10 @@ node_js:
 - "6.10.3"
 services:
   - postgresql
+addons:
+  sauce_connect:
+    username: 'cp4r3z@gmail.com',
+    access_key: 'd00a6baf-4b34-4790-a9cb-ed0bdf1303ff'
 env:
   global:
   - secure: TODO
