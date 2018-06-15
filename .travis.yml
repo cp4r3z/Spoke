@@ -19,7 +19,9 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
+- npm run dev &
 - npm run test-coverage
 - npm run test-e2e
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+#- curl -X PUT -s -d '{"passed": true}' -u cp4r3zsl:d00a6baf-4b34-4790-a9cb-ed0bdf1303ff https://saucelabs.com/rest/v1/cp4r3zsl/jobs/$SELENIUM_ID
