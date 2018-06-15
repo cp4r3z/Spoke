@@ -19,8 +19,9 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
   - cp .env.e2e .env
+  - npm run dev &
+  - sleep 120 # TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
 script:
-- npm run dev &
 - npm run test-coverage
 - npm run test-e2e
 after_script:
