@@ -18,6 +18,7 @@ before_script:
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
+<<<<<<< HEAD
 - cp .env.e2e .env
 jobs:
   include:
@@ -27,6 +28,13 @@ jobs:
     - npm run dev-nowrap &
     - sleep 120 # TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
     - npm run test-e2e
+=======
+script:
+- npm run test-coverage
+- npm run dev-nowrap &
+- sleep 120 # TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
+- npm run test-e2e
+>>>>>>> 610-e2e-saucelabs
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 #- curl -X PUT -s -d '{"passed": true}' -u cp4r3zsl:d00a6baf-4b34-4790-a9cb-ed0bdf1303ff https://saucelabs.com/rest/v1/cp4r3zsl/jobs/$SELENIUM_ID
