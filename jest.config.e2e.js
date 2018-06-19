@@ -7,9 +7,11 @@ const overrides = {
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/__test__/e2e/util/', '<rootDir>/__test__/e2e/pom/']
 }
 const merges = {
-  globals: {
-    BASE_URL: 'localhost:3000'
-  }
+  // Optionally, merge in changes to deeper objects
+  // Setting this is only necessary if your test target server is different
+  // globals: {
+  //   BASE_URL: 'localhost:3000'
+  // }
 }
 
 module.exports = _
