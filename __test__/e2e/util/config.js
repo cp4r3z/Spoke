@@ -1,5 +1,5 @@
 module.exports = {
-  baseUrl: global.BASE_URL,
+  baseUrl: process.env.BASE_URL,
   sauceLabs: {
     username: process.env.SAUCE_USERNAME,
     accessKey: process.env.SAUCE_ACCESS_KEY,
