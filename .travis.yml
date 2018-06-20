@@ -30,4 +30,3 @@ script:
 after_script:
 # Report test results
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-- curl -X PUT -s -d '{"passed": true}' -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY https://saucelabs.com/rest/v1/$SAUCE_USERNAME/jobs/$SELENIUM_ID

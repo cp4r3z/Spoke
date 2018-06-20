@@ -2,6 +2,7 @@ const _ = require('lodash')
 const config = require('./jest.config')
 
 const overrides = {
+  reporters: ['default', '<rootDir>/__test__/e2e/util/sauceReporter.js'],
   setupTestFrameworkScriptFile: '<rootDir>/__test__/e2e/util/setup.js',
   testMatch: ['**/__test__/e2e/**/*.js'],
   testPathIgnorePatterns: ['<rootDir>/node_modules/', '<rootDir>/__test__/e2e/util/', '<rootDir>/__test__/e2e/pom/']

@@ -1,6 +1,12 @@
 const { Builder, By, until } = require('selenium-webdriver')
+// const SauceLabs = require('saucelabs')
 const config = require('./util/config')
+// const saucelabs = new SauceLabs({
+//   username: config.sauceLabs.username,
+//   password: config.sauceLabs.accessKey
+// })
 console.log(`config.baseUrl: ${config.baseUrl}`)
+
 // promise.USE_PROMISE_MANAGER = false; //TODO: This was recommended by Selenum but it doesn't work.
 
 describe('Signing up a new user to Spoke', () => {
@@ -21,10 +27,19 @@ describe('Signing up a new user to Spoke', () => {
     await driver.getSession()
       .then(session => {
         const sessionId = session.getId()
+        driver.sessionID = session.getId()
         process.env.SELENIUM_ID = sessionId
-        console.log(`SauceOnDemandSessionID=${sessionId} job-name=${process.env.TRAVIS_JOB_NUMBER}`)
+        console.log(`SauceOnDemandSessionID=${sessionId} driver.sessionID=${driver.sessionID} job-name=${process.env.TRAVIS_JOB_NUMBER}`)
       })
     await driver.quit()
+
+    // var title = this.currentTest.title,
+    //       passed = (this.currentTest.state === 'passed') ? true : false;
+
+    // await saucelabs.updateJob(driver.sessionID, {
+    //   name: title,
+    //   passed: passed
+    // })
   })
 
   it('gets the guinea pig page', async () => {
