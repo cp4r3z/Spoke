@@ -11,30 +11,23 @@ env:
   global:
   - secure: TODO
 before_script:
+# Configure test database
 - psql -c 'CREATE DATABASE spoke_test;' -U postgres
 - psql -c "CREATE USER spoke_test WITH PASSWORD 'spoke_test';" -U postgres
 - psql -c 'GRANT ALL PRIVILEGES ON DATABASE spoke_test TO spoke_test;' -U postgres
-
+# Attach test reporter
 - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
 - chmod +x ./cc-test-reporter
 - ./cc-test-reporter before-build
-<<<<<<< HEAD
-- cp .env.e2e .env
-jobs:
-  include:
-    script:
-    - npm run test-coverage
-    script:
-    - npm run dev-nowrap &
-    - sleep 120 # TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
-    - npm run test-e2e
-=======
 script:
+# Run test coverage
 - npm run test-coverage
+# Start web server
 - npm run dev-nowrap &
 - sleep 120 # TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
+# Run end to end tests
 - npm run test-e2e
->>>>>>> 610-e2e-saucelabs
 after_script:
+# Report test results
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-#- curl -X PUT -s -d '{"passed": true}' -u cp4r3zsl:d00a6baf-4b34-4790-a9cb-ed0bdf1303ff https://saucelabs.com/rest/v1/cp4r3zsl/jobs/$SELENIUM_ID
+- curl -X PUT -s -d '{"passed": true}' -u $SAUCE_USERNAME:$SAUCE_ACCESS_KEY https://saucelabs.com/rest/v1/$SAUCE_USERNAME/jobs/$SELENIUM_ID
