@@ -20,14 +20,6 @@ before_script:
 - ./cc-test-reporter before-build
 script:
 - npm run test-coverage
-# Run End to End tests on non-pull requests
-# https://docs.travis-ci.com/user/pull-requests/#Pull-Requests-and-Security-Restrictions
-- |
-  if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then
-    npm run dev-nowrap &
-    sleep 120
-    npm run test-e2e --saucelabs
-  fi
-# TODO: Grep stdout or something to determine that the server is active. Or do this in the test setup.
+- ./travis-run-e2e-tests
 after_script:
 - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
