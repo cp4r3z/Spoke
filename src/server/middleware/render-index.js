@@ -26,6 +26,15 @@ const externalLinks = (process.env.NO_EXTERNAL_LINKS ? '' :
   `<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Poppins">
   <script src="https://cdn.auth0.com/js/lock/11.0.1/lock.min.js"></script>`)
 
+// This will disable ( or at least minimize) transition effects which is useful for end to end tests
+const cssDisabledTransitions = (process.env.NODE_ENV !== 'production' && !process.env.CSS_TRANSITIONS_DISABLED) ? '' :
+  `
+  * {
+    transition-duration: 16ms !important;
+    transition-delay: 0 !important;
+  }
+  `
+
 export default function renderIndex(html, css, assetMap, store) {
   return `
 <!DOCTYPE html>
@@ -35,6 +44,7 @@ export default function renderIndex(html, css, assetMap, store) {
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"/>
     <title>Spoke</title>
     ${externalLinks}
+    <style>${cssDisabledTransitions}</style>
     <style>
       /* CSS declarations go here */
       body {
@@ -44,7 +54,6 @@ export default function renderIndex(html, css, assetMap, store) {
         bottom: 0;
         left: 0;
         right: 0;
-
         padding: 0;
         margin: 0;
         height: 100%;

@@ -55,9 +55,8 @@ export const urlBuilder = {
 const waitAnd = async (driver, locator, options) => {
   const el = await driver.wait(until.elementLocated(locator, options.msWait || defaultWait))
   if (options.elementIsVisible !== false) await driver.wait(until.elementIsVisible(el))
-  if (options.waitAfterVisible) await driver.sleep(options.waitAfterVisible)
+  if (options.waitAfterVisible) { await driver.sleep(options.waitAfterVisible) } else { await driver.sleep(32) }
   if (options.click) await el.click()
-  if (options.keys) await driver.sleep(500)
   if (options.clear) await el.clear()
   if (options.keys) await el.sendKeys(options.keys)
   return el
