@@ -153,7 +153,7 @@ export const campaigns = {
     it('clicks Start Campaign', async () => {
       // Store the new campaign URL into a global for future use.
       global.e2e.newCampaignUrl = await driver.getCurrentUrl()
-      await wait.andClick(driver, pom.campaigns.start)
+      await wait.andClick(driver, pom.campaigns.start, { waitAfterVisible: 2000 })
       // Validate Started
       expect(await wait.andGetEl(driver, pom.campaigns.isStarted)).toBeTruthy()
     })
